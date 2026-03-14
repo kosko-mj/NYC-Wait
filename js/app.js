@@ -24,6 +24,7 @@ function loadGuests() {
         createdAt: Date.now() - 1000 * 60 * 15, // 15 min ago
         notifiedAt: null,
         seatedAt: null,
+        noShowAt: null
       },
       {
         id: "2",
@@ -40,6 +41,7 @@ function loadGuests() {
         createdAt: Date.now() - 1000 * 60 * 10, // 10 min ago
         notifiedAt: null,
         seatedAt: null,
+        noShowAt: null
       },
       {
         id: "3",
@@ -56,6 +58,7 @@ function loadGuests() {
         createdAt: Date.now() - 1000 * 60 * 20, // 20 min ago
         notifiedAt: Date.now() - 1000 * 60 * 6, // 6 min ago
         seatedAt: null,
+        noShowAt: null
       },
     ];
     saveGuests();
@@ -286,6 +289,7 @@ document
       createdAt: Date.now(),
       notifiedAt: null,
       seatedAt: null,
+      noShowAt: null
     };
 
     // Add to array and save
@@ -329,6 +333,32 @@ occasionButtons.forEach((btn) => {
     }
   });
 });
+
+// ===== AUTO NO-SHOW TIMER =====
+function checkNoShows() {
+  let changed = false;
+  
+  guests.forEach(guest => {
+    if (guest.status === 'notified' && guest.notifiedAt) {
+      const minutesSince = (Date.now() - guest.notifiedAt) / 60000;
+      
+      if (minutesSince >= 10) {
+        guest.status = 'no-show';
+        guest.noShowAt = Date.now();
+        changed = true;
+        console.log(`Auto no-show: ${guest.firstName} ${guest.lastName}`);
+      }
+    }
+  });
+  
+  if (changed) {
+    saveGuests();
+    renderWaitlist();
+  }
+}
+
+// Run every 30 seconds
+setInterval(checkNoShows, 30000);
 
 // ===== INIT =====
 loadGuests();
