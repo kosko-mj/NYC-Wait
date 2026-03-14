@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Local config
+.env
+.env.local
