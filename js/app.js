@@ -67,6 +67,55 @@ function saveGuests() {
   localStorage.setItem("nyc-waitlist", JSON.stringify(guests));
 }
 
+// ===== RENDER HISTORY =====
+function renderHistory() {
+  const historyContainer = document.getElementById('history-container');
+  if (!historyContainer) return;
+  
+  historyContainer.innerHTML = '';
+  
+  const historyGuests = guests.filter(g => g.status === 'seated' || g.status === 'no-show');
+  
+  historyGuests.forEach(guest => {
+    const historyItem = document.createElement('div');
+    historyItem.className = 'history-item';
+    
+    // Build occasions HTML
+    const occasionsHtml = guest.notes.occasions.map(occ => {
+      const iconMap = {
+        Birthday: 'ri-cake-2-fill',
+        Anniversary: 'ri-hearts-line',
+        VIP: 'ri-vip-crown-line'
+      };
+      return `<i class="${iconMap[occ] || 'ri-star-line'}"></i>`;
+    }).join(' ');
+    
+    // Build allergy HTML if present
+    const allergyHtml = guest.notes.allergies ? 
+      `<span class="history-allergy"><i class="ri-alert-line"></i> ${guest.notes.allergies}</span>` : '';
+    
+    const statusClass = guest.status === 'seated' ? 'seated' : 'no-show';
+    const statusDisplay = guest.status === 'seated' ? 'Seated' : '<i class="ri-timer-line"></i>';
+    
+    historyItem.innerHTML = `
+      <div class="history-info">
+        <span class="history-name">${guest.firstName} · Party of ${guest.partySize}</span>
+        <span class="history-occasion">${occasionsHtml}</span>
+        ${allergyHtml}
+      </div>
+      <span class="history-status ${statusClass}">${statusDisplay}</span>
+    `;
+    
+    historyContainer.appendChild(historyItem);
+  });
+  
+  // Update history count
+  const historyCount = document.querySelector('.history-count');
+  if (historyCount) {
+    historyCount.textContent = `(${historyGuests.length})`;
+  }
+}
+
 // ===== RENDER WAITLIST =====
 function renderWaitlist() {
   const container = document.getElementById("waitlist-container");
@@ -85,7 +134,7 @@ function renderWaitlist() {
       return a.createdAt - b.createdAt;
     }
     if (a.status === "notified" && b.status === "notified") {
-      return b.notifiedAt - a.notifiedAt; // ← THIS LINE CHANGED
+      return b.notifiedAt - a.notifiedAt;
     }
     return 0;
   });
@@ -97,6 +146,9 @@ function renderWaitlist() {
   // Update waiting count
   document.querySelector(".waiting-count").textContent =
     `(${guests.filter((g) => g.status === "waiting").length})`;
+    
+  // Update history
+  renderHistory();
 }
 
 function createGuestCard(guest) {
@@ -180,6 +232,25 @@ document.addEventListener("click", function (e) {
   }
 });
 
+// ===== SEATED BUTTON =====
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("btn-seat")) {
+    const card = e.target.closest(".guest-card");
+    const guestId = card.dataset.id;
+    const guest = guests.find((g) => g.id === guestId);
+
+    if (guest && (guest.status === "waiting" || guest.status === "notified")) {
+      // Update guest
+      guest.status = "seated";
+      guest.seatedAt = Date.now();
+
+      // Save and re-render
+      saveGuests();
+      renderWaitlist();
+    }
+  }
+});
+
 // ===== ADD GUEST MODAL =====
 document
   .getElementById("add-guest-form")
@@ -196,7 +267,7 @@ document
     const generalNotes = document.getElementById("general-notes").value;
     const allergyNotes = document.getElementById("allergy-notes").value;
 
-    // Get selected occasions from buttons (we'll add this next)
+    // Get selected occasions from buttons
     const occasions = [...selectedOccasions];
 
     // Create new guest object
@@ -238,7 +309,7 @@ document
 
 // ===== QUICK OCCASION BUTTONS =====
 const occasionButtons = document.querySelectorAll(".note-btn");
-const selectedOccasions = []; // Fixed: was 'occasions' but should be 'selectedOccasions'
+const selectedOccasions = [];
 
 occasionButtons.forEach((btn) => {
   btn.addEventListener("click", function () {
