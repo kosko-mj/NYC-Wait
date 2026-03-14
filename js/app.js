@@ -77,7 +77,7 @@ function renderWaitlist() {
     (g) => g.status === "waiting" || g.status === "notified",
   );
 
-  // Sort: waiting first (by createdAt), then notified (by notifiedAt)
+  // Sort: waiting first (by createdAt), then notified (newest first)
   const sorted = [...activeGuests].sort((a, b) => {
     if (a.status === "waiting" && b.status === "notified") return -1;
     if (a.status === "notified" && b.status === "waiting") return 1;
@@ -85,7 +85,7 @@ function renderWaitlist() {
       return a.createdAt - b.createdAt;
     }
     if (a.status === "notified" && b.status === "notified") {
-      return a.notifiedAt - b.notifiedAt;
+      return b.notifiedAt - a.notifiedAt; // ← THIS LINE CHANGED
     }
     return 0;
   });
@@ -158,6 +158,28 @@ function createGuestCard(guest) {
   return card;
 }
 
+// ===== NOTIFY BUTTON =====
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("btn-notify")) {
+    const card = e.target.closest(".guest-card");
+    const guestId = card.dataset.id;
+    const guest = guests.find((g) => g.id === guestId);
+
+    if (guest && guest.status === "waiting") {
+      // Update guest
+      guest.status = "notified";
+      guest.notifiedAt = Date.now();
+
+      // Stub for SMS (we'll implement properly later)
+      console.log(`SMS sent to ${guest.phone}: Your table is ready!`);
+
+      // Save and re-render
+      saveGuests();
+      renderWaitlist();
+    }
+  }
+});
+
 // ===== ADD GUEST MODAL =====
 document
   .getElementById("add-guest-form")
@@ -216,7 +238,7 @@ document
 
 // ===== QUICK OCCASION BUTTONS =====
 const occasionButtons = document.querySelectorAll(".note-btn");
-const selectedOccasions = [];  // Fixed: was 'occasions' but should be 'selectedOccasions'
+const selectedOccasions = []; // Fixed: was 'occasions' but should be 'selectedOccasions'
 
 occasionButtons.forEach((btn) => {
   btn.addEventListener("click", function () {
