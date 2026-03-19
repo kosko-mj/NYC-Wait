@@ -2,9 +2,12 @@
 import { guests, saveGuests } from './state.js';
 import { renderWaitlist } from './render.js';
 
+console.log('Events.js loaded'); // Check if file loads
+
 // Notify button
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("btn-notify")) {
+    console.log('Notify clicked'); // Debug
     const card = e.target.closest(".guest-card");
     const guest = guests.find(g => g.id === card.dataset.id);
     
@@ -21,6 +24,7 @@ document.addEventListener("click", function (e) {
 // Seated button
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("btn-seat")) {
+    console.log('Seated clicked'); // Debug
     const card = e.target.closest(".guest-card");
     const guest = guests.find(g => g.id === card.dataset.id);
     
@@ -35,10 +39,13 @@ document.addEventListener("click", function (e) {
 
 // Modal form
 const occasionButtons = document.querySelectorAll(".note-btn");
+console.log('Occasion buttons found:', occasionButtons.length); // Debug
+
 const selectedOccasions = [];
 
 occasionButtons.forEach(btn => {
   btn.addEventListener("click", function () {
+    console.log('Occasion clicked:', this.dataset.note); // Debug
     const occasion = this.dataset.note;
     const index = selectedOccasions.indexOf(occasion);
     
@@ -54,8 +61,12 @@ occasionButtons.forEach(btn => {
   });
 });
 
-document.getElementById("add-guest-form").addEventListener("submit", function (e) {
+const form = document.getElementById("add-guest-form");
+console.log('Form found:', form); // Debug
+
+form.addEventListener("submit", function (e) {
   e.preventDefault();
+  console.log('Form submitted'); // Debug
 
   const newGuest = {
     id: Date.now().toString(),
@@ -74,6 +85,8 @@ document.getElementById("add-guest-form").addEventListener("submit", function (e
     seatedAt: null,
     noShowAt: null
   };
+  
+  console.log('New guest:', newGuest); // Debug
 
   guests.push(newGuest);
   saveGuests();
