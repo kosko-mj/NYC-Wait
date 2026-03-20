@@ -622,3 +622,41 @@ dialog .modal-content {
 .hidden {
     display: none;
 }
+
+/* ===== RESET DEMO BUTTON ===== */
+.reset-container {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.btn-reset {
+    outline: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-reset span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    background: white;
+    color: #6B7280;
+    border: 2px solid #E5E7EB;
+    padding: 0.6em 1.2em;
+    border-radius: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.1s ease;
+}
+
+.btn-reset:hover span {
+    background: #F9FAFB;
+    border-color: #1F2937;
+    color: #1F2937;
+}

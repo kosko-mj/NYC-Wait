@@ -37,6 +37,17 @@ if (timerSelect) {
     });
 }
 
+// ===== RESET DEMO BUTTON =====
+const resetBtn = document.getElementById('reset-demo-btn');
+if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+        if (confirm('Reset all data to demo state? This will clear all current guests.')) {
+            localStorage.clear();
+            location.reload();
+        }
+    });
+}
+
 // ===== INITIALIZE =====
 loadGuests();
 updateDateTime();
