@@ -1,210 +1,315 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
     <title>NYC Waitlist · Tablet</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <!-- ===== MAIN CONTAINER ===== -->
     <div class="container">
-        
-        <!-- ===== HEADER ===== -->
-        <header>
-            <h1>NYC WAITLIST</h1>
-            <div class="datetime" id="current-datetime">
-                March 14, 2025 · 10:47 AM
+      <!-- ===== HEADER ===== -->
+      <header>
+        <div class="brand">
+          <h1>3Top</h1>
+        </div>
+        <div class="datetime" id="current-datetime">
+          March 14, 2025 · 10:47 AM
+        </div>
+        <button
+          class="btn-add"
+          id="add-guest-btn"
+          onclick="document.getElementById('guest-modal').showModal()"
+        >
+          <span>+ Add Guest</span>
+        </button>
+      </header>
+
+      <!-- ===== ACTIVE WAITLIST ===== -->
+      <section class="waitlist-section">
+        <h2>Now Waiting <span class="waiting-count">(3)</span></h2>
+
+        <div id="waitlist-container">
+          <!-- GUEST CARD 1: Waiting (Grey Timer) -->
+          <div class="guest-card waiting">
+            <div class="guest-main">
+              <div class="guest-info">
+                <span class="guest-name">Taylor</span>
+                <span class="party-size">· Party of 4</span>
+              </div>
+              <div class="guest-phone">
+                <i class="ri-phone-line"></i> ··0123
+              </div>
+              <div class="guest-occasion">
+                <i class="ri-cake-2-fill"></i>
+              </div>
+              <div class="guest-allergy">
+                <i class="ri-alert-line"></i> Peanuts only - other nuts fine
+              </div>
             </div>
-            <button class="btn-add" id="add-guest-btn" onclick="document.getElementById('guest-modal').showModal()">
-                <span>+ Add Guest</span>
-            </button>
-        </header>
-
-        <!-- ===== ACTIVE WAITLIST ===== -->
-        <section class="waitlist-section">
-            <h2>Now Waiting <span class="waiting-count">(3)</span></h2>
-            
-            <div id="waitlist-container">
-                <!-- GUEST CARD 1: Waiting (Grey Timer) -->
-                <div class="guest-card waiting">
-                    <div class="guest-main">
-                        <div class="guest-info">
-                            <span class="guest-name">Taylor</span>
-                            <span class="party-size">· Party of 4</span>
-                        </div>
-                        <div class="guest-phone">
-                            <i class="ri-phone-line"></i> ··0123
-                        </div>
-                        <div class="guest-occasion">
-                            <i class="ri-cake-2-fill"></i>
-                        </div>
-                        <div class="guest-allergy">
-                            <i class="ri-alert-line"></i> Peanuts only - other nuts fine
-                        </div>
-                    </div>
-                    <div class="guest-actions">
-                        <span class="timer-icon timer-waiting"><i class="ri-timer-line"></i></span>
-                        <button class="btn btn-notify">Notify</button>
-                        <button class="btn btn-seat">Seated</button>
-                    </div>
-                </div>
-
-                <!-- GUEST CARD 2: Waiting (Grey Timer) -->
-                <div class="guest-card waiting">
-                    <div class="guest-main">
-                        <div class="guest-info">
-                            <span class="guest-name">Alex</span>
-                            <span class="party-size">· Party of 2</span>
-                        </div>
-                        <div class="guest-phone">
-                            <i class="ri-phone-line"></i> ··0456
-                        </div>
-                        <div class="guest-occasion">
-                            <i class="ri-cake-2-fill"></i>
-                            <i class="ri-hearts-line"></i>
-                        </div>
-                        <!-- No allergy line -->
-                    </div>
-                    <div class="guest-actions">
-                        <span class="timer-icon timer-waiting"><i class="ri-timer-line"></i></span>
-                        <button class="btn btn-notify">Notify</button>
-                        <button class="btn btn-seat">Seated</button>
-                    </div>
-                </div>
-
-                <!-- GUEST CARD 3: Notified 6min (Amber Timer - 4-9min range) -->
-                <div class="guest-card notified">
-                    <div class="guest-main">
-                        <div class="guest-info">
-                            <span class="guest-name">Morgan</span>
-                            <span class="party-size">· Party of 3</span>
-                        </div>
-                        <div class="guest-phone">
-                            <i class="ri-phone-line"></i> ··0789
-                        </div>
-                        <div class="guest-occasion">
-                            <i class="ri-vip-crown-line"></i>
-                        </div>
-                        <div class="guest-allergy">
-                            <i class="ri-alert-line"></i> Deathly allergic to shellfish - epipen on site
-                        </div>
-                    </div>
-                    <div class="guest-actions">
-                        <span class="timer-icon timer-notified-4-9"><i class="ri-timer-line"></i></span>
-                        <button class="btn btn-notify">Notify</button>
-                        <button class="btn btn-seat">Seated</button>
-                    </div>
-                </div>
+            <div class="guest-actions">
+              <span class="timer-icon timer-waiting"
+                ><i class="ri-timer-line"></i
+              ></span>
+              <button class="btn btn-notify">Notify</button>
+              <button class="btn btn-seat">Seated</button>
             </div>
-        </section>
+          </div>
 
-        <!-- ===== HISTORY SECTION ===== -->
-        <section class="history-section">
-            <details>
-                <summary>
-                    <h2>History <span class="history-count">(2)</span></h2>
-                </summary>
-                <div id="history-container">
-                    <!-- HISTORY ITEM: Seated -->
-                    <div class="history-item">
-                        <div class="history-info">
-                            <span class="history-name">Jamie · Party of 3</span>
-                            <span class="history-occasion">
-                                <i class="ri-cake-2-fill"></i> Birthday
-                            </span>
-                        </div>
-                        <span class="history-status seated">Seated</span>
-                    </div>
+          <!-- GUEST CARD 2: Waiting (Grey Timer) -->
+          <div class="guest-card waiting">
+            <div class="guest-main">
+              <div class="guest-info">
+                <span class="guest-name">Alex</span>
+                <span class="party-size">· Party of 2</span>
+              </div>
+              <div class="guest-phone">
+                <i class="ri-phone-line"></i> ··0456
+              </div>
+              <div class="guest-occasion">
+                <i class="ri-cake-2-fill"></i>
+                <i class="ri-hearts-line"></i>
+              </div>
+              <!-- No allergy line -->
+            </div>
+            <div class="guest-actions">
+              <span class="timer-icon timer-waiting"
+                ><i class="ri-timer-line"></i
+              ></span>
+              <button class="btn btn-notify">Notify</button>
+              <button class="btn btn-seat">Seated</button>
+            </div>
+          </div>
 
-                    <!-- HISTORY ITEM: No-show (Red Stopwatch) -->
-                    <div class="history-item">
-                        <div class="history-info">
-                            <span class="history-name">Riley · Party of 2</span>
-                            <span class="history-occasion">
-                                <i class="ri-hearts-line"></i> Anniversary
-                            </span>
-                            <span class="history-allergy">
-                                <i class="ri-alert-line"></i> Gluten allergy
-                            </span>
-                        </div>
-                        <span class="history-status no-show"><i class="ri-timer-line"></i></span>
-                    </div>
-                </div>
-            </details>
-        </section>
+          <!-- GUEST CARD 3: Notified 6min (Amber Timer - 4-9min range) -->
+          <div class="guest-card notified">
+            <div class="guest-main">
+              <div class="guest-info">
+                <span class="guest-name">Morgan</span>
+                <span class="party-size">· Party of 3</span>
+              </div>
+              <div class="guest-phone">
+                <i class="ri-phone-line"></i> ··0789
+              </div>
+              <div class="guest-occasion">
+                <i class="ri-vip-crown-line"></i>
+              </div>
+              <div class="guest-allergy">
+                <i class="ri-alert-line"></i> Deathly allergic to shellfish -
+                epipen on site
+              </div>
+            </div>
+            <div class="guest-actions">
+              <span class="timer-icon timer-notified-4-9"
+                ><i class="ri-timer-line"></i
+              ></span>
+              <button class="btn btn-notify">Notify</button>
+              <button class="btn btn-seat">Seated</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HISTORY SECTION ===== -->
+      <section class="history-section">
+        <details>
+          <summary>
+            <h2>History <span class="history-count">(2)</span></h2>
+          </summary>
+          <div id="history-container">
+            <!-- HISTORY ITEM: Seated -->
+            <div class="history-item">
+              <div class="history-info">
+                <span class="history-name">Jamie · Party of 3</span>
+                <span class="history-occasion">
+                  <i class="ri-cake-2-fill"></i> Birthday
+                </span>
+              </div>
+              <span class="history-status seated">Seated</span>
+            </div>
+
+            <!-- HISTORY ITEM: No-show (Red Stopwatch) -->
+            <div class="history-item">
+              <div class="history-info">
+                <span class="history-name">Riley · Party of 2</span>
+                <span class="history-occasion">
+                  <i class="ri-hearts-line"></i> Anniversary
+                </span>
+                <span class="history-allergy">
+                  <i class="ri-alert-line"></i> Gluten allergy
+                </span>
+              </div>
+              <span class="history-status no-show"
+                ><i class="ri-timer-line"></i
+              ></span>
+            </div>
+          </div>
+        </details>
+      </section>
     </div>
 
     <!-- ===== MODAL FORM ===== -->
-    <dialog id="guest-modal" class="modal" onclick="if(event.target === this) this.close();">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Add Guest</h2>
-            </div>
-            
-            <form id="add-guest-form">
-                <!-- Row 1: First Name + Last Name -->
-                <div class="form-row">
-                    <div class="input-group">
-                        <label for="first-name">First name *</label>
-                        <input type="text" id="first-name" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="last-name">Last name *</label>
-                        <input type="text" id="last-name" required>
-                    </div>
-                </div>
-
-                <!-- Row 2: Party Size + Phone -->
-                <div class="form-row">
-                    <div class="input-group">
-                        <label for="party-size">Party size *</label>
-                        <input type="number" id="party-size" min="1" max="20" value="2" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="guest-phone">Phone *</label>
-                        <input type="tel" id="guest-phone" placeholder="555-555-5555" required>
-                    </div>
-                </div>
-
-                <!-- Quick Occasion Buttons -->
-                <div class="form-group">
-                    <label>Occasion:</label>
-                    <div class="quick-notes">
-                        <button type="button" class="note-btn" data-note="Birthday" title="Birthday"><i class="ri-cake-2-fill"></i></button>
-                        <button type="button" class="note-btn" data-note="Graduation" title="Graduation"><i class="ri-graduation-cap-fill"></i></button>
-                        <button type="button" class="note-btn" data-note="Anniversary" title="Anniversary"><i class="ri-hearts-line"></i></button>
-                        <button type="button" class="note-btn" data-note="Engagement" title="Engagement"><i class="ri-diamond-ring-line"></i></button>
-                        <button type="button" class="note-btn" data-note="Promotion" title="Promotion"><i class="ri-award-fill"></i></button>
-                        <button type="button" class="note-btn" data-note="First time" title="First time"><i class="ri-sparkling-line"></i></button>
-                        <button type="button" class="note-btn" data-note="VIP" title="VIP"><i class="ri-vip-crown-line"></i></button>
-                    </div>
-                </div>
-
-                <!-- General Notes -->
-                <div class="form-group">
-                    <label for="general-notes">Notes (optional)</label>
-                    <textarea id="general-notes" rows="2" placeholder="Window seat, special requests..."></textarea>
-                </div>
-
-                <!-- Allergy Notes -->
-                <div class="form-group allergy-group">
-                    <label for="allergy-notes"><i class="ri-alert-line"></i> ALLERGY NOTES - Be specific:</label>
-                    <textarea id="allergy-notes" rows="3" placeholder='Example: "Peanuts ONLY - other nuts fine" or "Deathly allergic to shellfish"'></textarea>
-                    <small class="hint">Tell us exactly what - we'll make sure the kitchen knows</small>
-                </div>
-
-                <!-- Form Actions -->
-                <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="document.getElementById('guest-modal').close()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add to Waitlist</button>
-                </div>
-            </form>
+    <dialog
+      id="guest-modal"
+      class="modal"
+      onclick="if (event.target === this) this.close();"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add Guest</h2>
         </div>
+
+        <form id="add-guest-form">
+          <!-- Row 1: First Name + Last Name -->
+          <div class="form-row">
+            <div class="input-group">
+              <label for="first-name">First name *</label>
+              <input type="text" id="first-name" required />
+            </div>
+            <div class="input-group">
+              <label for="last-name">Last name *</label>
+              <input type="text" id="last-name" required />
+            </div>
+          </div>
+
+          <!-- Row 2: Party Size + Phone -->
+          <div class="form-row">
+            <div class="input-group">
+              <label for="party-size">Party size *</label>
+              <input
+                type="number"
+                id="party-size"
+                min="1"
+                max="20"
+                value="2"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="guest-phone">Phone *</label>
+              <input
+                type="tel"
+                id="guest-phone"
+                placeholder="555-555-5555"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Quick Occasion Buttons -->
+          <div class="form-group">
+            <label>Occasion:</label>
+            <div class="quick-notes">
+              <button
+                type="button"
+                class="note-btn"
+                data-note="Birthday"
+                title="Birthday"
+              >
+                <i class="ri-cake-2-fill"></i>
+              </button>
+              <button
+                type="button"
+                class="note-btn"
+                data-note="Graduation"
+                title="Graduation"
+              >
+                <i class="ri-graduation-cap-fill"></i>
+              </button>
+              <button
+                type="button"
+                class="note-btn"
+                data-note="Anniversary"
+                title="Anniversary"
+              >
+                <i class="ri-hearts-line"></i>
+              </button>
+              <button
+                type="button"
+                class="note-btn"
+                data-note="Engagement"
+                title="Engagement"
+              >
+                <i class="ri-diamond-ring-line"></i>
+              </button>
+              <button
+                type="button"
+                class="note-btn"
+                data-note="Promotion"
+                title="Promotion"
+              >
+                <i class="ri-award-fill"></i>
+              </button>
+              <button
+                type="button"
+                class="note-btn"
+                data-note="First time"
+                title="First time"
+              >
+                <i class="ri-sparkling-line"></i>
+              </button>
+              <button
+                type="button"
+                class="note-btn"
+                data-note="VIP"
+                title="VIP"
+              >
+                <i class="ri-vip-crown-line"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- General Notes -->
+          <div class="form-group">
+            <label for="general-notes">Notes (optional)</label>
+            <textarea
+              id="general-notes"
+              rows="2"
+              placeholder="Window seat, special requests..."
+            ></textarea>
+          </div>
+
+          <!-- Allergy Notes -->
+          <div class="form-group allergy-group">
+            <label for="allergy-notes"
+              ><i class="ri-alert-line"></i> ALLERGY NOTES - Be specific:</label
+            >
+            <textarea
+              id="allergy-notes"
+              rows="3"
+              placeholder='Example: "Peanuts ONLY - other nuts fine" or "Deathly allergic to shellfish"'
+            ></textarea>
+            <small class="hint"
+              >Tell us exactly what - we'll make sure the kitchen knows</small
+            >
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn btn-cancel"
+              onclick="document.getElementById('guest-modal').close()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Add to Waitlist
+            </button>
+          </div>
+        </form>
+      </div>
     </dialog>
 
     <!-- ===== SCRIPTS ===== -->
     <script type="module" src="js/main.js"></script>
-</body>
+  </body>
 </html>

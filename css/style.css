@@ -27,6 +27,25 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
+/* ===== BRAND ===== */
+.brand {
+    margin-bottom: 8px;
+}
+
+.brand h1 {
+    margin: 0;
+    font-family: inherit;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    color: #1F2937;
+    background: white;
+    padding: 0.4em 1em;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0 0 #1F2937;
+    display: inline-block;
+}
+
 /* ===== HEADER ===== */
 header {
     display: flex;
