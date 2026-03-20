@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,218 +6,105 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
     />
-    <title>3Top · Waitlist</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>3Top · Restaurant Waitlist App</title>
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/landing.css" />
   </head>
   <body>
-    <!-- ===== MAIN CONTAINER ===== -->
-    <div class="container">
-      <header>
-        <div class="header-top">
-          <div class="header-left"></div>
-          <div class="brand">
-            <h1>3TOP</h1>
-          </div>
-          <div class="timer-selector">
-            <select id="no-show-timer">
-              <option value="10">10 min</option>
-              <option value="15" selected>15 min</option>
-              <option value="20">20 min</option>
-              <option value="30">30 min</option>
-            </select>
-          </div>
-        </div>
-        <div class="datetime" id="current-datetime">
-          March 20, 2025 • 10:47 AM
-        </div>
-        <button
-          class="btn-add"
-          id="add-guest-btn"
-          onclick="document.getElementById('guest-modal').showModal()"
-        >
-          <span>+ Add Guest</span>
-        </button>
-      </header>
-
-      <!-- ===== ACTIVE WAITLIST ===== -->
-      <section class="waitlist-section">
-        <h2>Now Waiting <span class="waiting-count">(3)</span></h2>
-        <div id="waitlist-container">
-          <!-- GUEST CARD 1: Waiting (Grey Timer) -->
-          <div class="guest-card waiting" data-id="1">
-            <div class="guest-main">
-              <div class="guest-info">
-                <span class="guest-name">Taylor</span>
-                <span class="party-size">· Party of 4</span>
-              </div>
-              <div class="guest-phone">
-                <i class="ri-phone-line"></i> ··0123
-              </div>
-              <div class="guest-occasion">
-                <i class="ri-cake-2-fill"></i>
-              </div>
-              <div class="guest-allergy">
-                <i class="ri-alert-line"></i> Peanuts only - other nuts fine
-              </div>
-            </div>
-            <div class="guest-actions">
-              <span class="timer-icon timer-waiting"><i class="ri-timer-line"></i></span>
-              <button class="btn btn-notify">Notify</button>
-              <button class="btn btn-seat">Seated</button>
-            </div>
-          </div>
-
-          <!-- GUEST CARD 2: Waiting (Grey Timer) -->
-          <div class="guest-card waiting" data-id="2">
-            <div class="guest-main">
-              <div class="guest-info">
-                <span class="guest-name">Alex</span>
-                <span class="party-size">· Party of 2</span>
-              </div>
-              <div class="guest-phone">
-                <i class="ri-phone-line"></i> ··0456
-              </div>
-              <div class="guest-occasion">
-                <i class="ri-cake-2-fill"></i>
-                <i class="ri-hearts-line"></i>
-              </div>
-            </div>
-            <div class="guest-actions">
-              <span class="timer-icon timer-waiting"><i class="ri-timer-line"></i></span>
-              <button class="btn btn-notify">Notify</button>
-              <button class="btn btn-seat">Seated</button>
-            </div>
-          </div>
-
-          <!-- GUEST CARD 3: Notified 6min (Amber Timer) -->
-          <div class="guest-card notified" data-id="3">
-            <div class="guest-main">
-              <div class="guest-info">
-                <span class="guest-name">Morgan</span>
-                <span class="party-size">· Party of 3</span>
-              </div>
-              <div class="guest-phone">
-                <i class="ri-phone-line"></i> ··0789
-              </div>
-              <div class="guest-occasion">
-                <i class="ri-vip-crown-line"></i>
-              </div>
-              <div class="guest-allergy">
-                <i class="ri-alert-line"></i> Deathly allergic to shellfish - epipen on site
-              </div>
-            </div>
-            <div class="guest-actions">
-              <span class="timer-icon timer-notified-4-9"><i class="ri-timer-line"></i></span>
-              <button class="btn btn-notify">Notify</button>
-              <button class="btn btn-seat">Seated</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== HISTORY SECTION ===== -->
-        <section class="history-section">
-        <details>
-            <summary>
-            <h2>History <span class="history-count">(0)</span></h2>
-            </summary>
-            <div id="history-container"></div>
-            <div class="reset-container">
-            <button class="btn-reset" id="reset-demo-btn">
-                <span>Reset Demo</span>
-            </button>
-            </div>
-        </details>
-        </section>
-
-    <!-- ===== MODAL FORM ===== -->
-    <dialog
-      id="guest-modal"
-      class="modal"
-      onclick="if (event.target === this) this.close();"
-    >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Add Guest</h2>
-        </div>
-
-        <form id="add-guest-form">
-          <div class="form-row">
-            <div class="input-group">
-              <label for="first-name">First name *</label>
-              <input type="text" id="first-name" required />
-            </div>
-            <div class="input-group">
-              <label for="last-name">Last name *</label>
-              <input type="text" id="last-name" required />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="input-group">
-              <label for="party-size">Party size *</label>
-              <input type="number" id="party-size" min="1" max="20" value="2" required />
-            </div>
-            <div class="input-group">
-              <label for="guest-phone">Phone *</label>
-              <input type="tel" id="guest-phone" placeholder="555-555-5555" required />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Occasion:</label>
-            <div class="quick-notes">
-              <button type="button" class="note-btn" data-note="Birthday" title="Birthday">
-                <i class="ri-cake-2-fill"></i>
-              </button>
-              <button type="button" class="note-btn" data-note="Graduation" title="Graduation">
-                <i class="ri-graduation-cap-fill"></i>
-              </button>
-              <button type="button" class="note-btn" data-note="Anniversary" title="Anniversary">
-                <i class="ri-hearts-line"></i>
-              </button>
-              <button type="button" class="note-btn" data-note="Engagement" title="Engagement">
-                <i class="ri-diamond-ring-line"></i>
-              </button>
-              <button type="button" class="note-btn" data-note="Promotion" title="Promotion">
-                <i class="ri-award-fill"></i>
-              </button>
-              <button type="button" class="note-btn" data-note="First time" title="First time">
-                <i class="ri-sparkling-line"></i>
-              </button>
-              <button type="button" class="note-btn" data-note="VIP" title="VIP">
-                <i class="ri-vip-crown-line"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="general-notes">Notes (optional)</label>
-            <textarea id="general-notes" rows="2" placeholder="Window seat, special requests..."></textarea>
-          </div>
-
-          <div class="form-group allergy-group">
-            <label for="allergy-notes"><i class="ri-alert-line"></i> ALLERGY NOTES - Be specific:</label>
-            <textarea id="allergy-notes" rows="3" placeholder='Example: "Peanuts ONLY - other nuts fine" or "Deathly allergic to shellfish"'></textarea>
-            <small class="hint">Tell us exactly what - we'll make sure the kitchen knows</small>
-          </div>
-
-          <div class="form-actions">
-            <button type="button" class="btn btn-cancel" onclick="document.getElementById('guest-modal').close()">
-              Cancel
-            </button>
-            <button type="submit" class="btn btn-primary">
-              Add to Waitlist
-            </button>
-          </div>
-        </form>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="brand">
+        <h1>3<span>TOP</span></h1>
       </div>
-    </dialog>
+      <p class="tagline">A simple waitlist for busy dining rooms.</p>
+      <p class="description">
+        No accounts. No logins. No training.<br />Just a waitlist that works
+        when you need it.
+      </p>
+      <a href="app.html" class="btn-primary">Try the Demo →</a>
+    </section>
 
-    <script type="module" src="js/main.js"></script>
+    <!-- Features Grid -->
+    <section class="features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="ri-user-add-line"></i>
+        </div>
+        <h3>Add Guests Fast</h3>
+        <p>Party of 4, shellfish allergy, birthday. 15 seconds. Next.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="ri-timer-line"></i>
+        </div>
+        <h3>No-Show Timer</h3>
+        <p>
+          Notify when ready, no-show at 15. Adjust if your room moves different.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="ri-tablet-line"></i>
+        </div>
+        <h3>Any Tablet</h3>
+        <p>
+          iPad, Android tablet, whatever's behind the host stand. Stays put.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="ri-history-line"></i>
+        </div>
+        <h3>Guest History</h3>
+        <p>Seated and no-show history. Allergies flagged. Occasions tracked.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="ri-lock-unlock-line"></i>
+        </div>
+        <h3>No Accounts</h3>
+        <p>Open app. Use app. Close app. Data lives where you left it.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="ri-message-2-line"></i>
+        </div>
+        <h3>SMS Ready</h3>
+        <p>
+          Text guests when table's ready. Stubbed now, plug in Twilio anytime.
+        </p>
+      </div>
+    </section>
+
+    <!-- App Preview -->
+    <section class="preview">
+      <h2>Built for the host stand</h2>
+      <video class="app-screenshot" autoplay loop muted playsinline>
+        <source src="/demo.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">One tap to notify. One tap to seat. That's it.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Ready to ditch the paper lists?</h2>
+      <a href="index.html" class="btn-primary btn-large">Try 3Top Now →</a>
+      <p class="qr-note">Or scan QR code at host stand to try on your phone</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        3Top Waitlist · Built for NYC restaurants ·
+        <a href="mailto:hello@3top.app">hello@3top.app</a>
+      </p>
+      <p class="demo-note">
+        No demo data is saved — all guests are stored locally on your device.
+      </p>
+    </footer>
   </body>
 </html>
