@@ -1,5 +1,6 @@
 // ===== STATE MANAGEMENT =====
 export let guests = [];
+export let noShowTimerMinutes = 15; // Default 15 minutes
 
 export function loadGuests() {
   const stored = localStorage.getItem("nyc-waitlist");
@@ -68,17 +69,22 @@ export function saveGuests() {
   localStorage.setItem("nyc-waitlist", JSON.stringify(guests));
 }
 
+export function setNoShowTimer(minutes) {
+  noShowTimerMinutes = minutes;
+  console.log(`No-show timer set to ${minutes} minutes`);
+}
+
 export function checkNoShows(renderCallback) {
   let changed = false;
   
   guests.forEach(guest => {
     if (guest.status === 'notified' && guest.notifiedAt) {
       const minutesSince = (Date.now() - guest.notifiedAt) / 60000;
-      if (minutesSince >= 10) {
+      if (minutesSince >= noShowTimerMinutes) {
         guest.status = 'no-show';
         guest.noShowAt = Date.now();
         changed = true;
-        console.log(`Auto no-show: ${guest.firstName} ${guest.lastName}`);
+        console.log(`Auto no-show: ${guest.firstName} ${guest.lastName} (${noShowTimerMinutes} min timer)`);
       }
     }
   });

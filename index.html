@@ -16,13 +16,23 @@
   <body>
     <!-- ===== MAIN CONTAINER ===== -->
     <div class="container">
-      <!-- ===== HEADER ===== -->
       <header>
-        <div class="brand">
-          <h1>3Top</h1>
+        <div class="header-top">
+          <div class="header-left"></div>
+          <div class="brand">
+            <h1>3TOP</h1>
+          </div>
+          <div class="timer-selector">
+            <select id="no-show-timer">
+              <option value="10">10 min</option>
+              <option value="15" selected>15 min</option>
+              <option value="20">20 min</option>
+              <option value="30">30 min</option>
+            </select>
+          </div>
         </div>
         <div class="datetime" id="current-datetime">
-          March 14, 2025 · 10:47 AM
+          March 20, 2025 • 10:47 AM
         </div>
         <button
           class="btn-add"

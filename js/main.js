@@ -1,11 +1,7 @@
 // ===== MAIN ENTRY =====
-import { loadGuests, checkNoShows } from './state.js';
+import { loadGuests, checkNoShows, setNoShowTimer } from './state.js';
 import { renderWaitlist } from './render.js';
 import './events.js';  // Just import to register handlers
-
-// Initialize
-loadGuests();
-renderWaitlist();
 
 // ===== UPDATE DATE & TIME =====
 function updateDateTime() {
@@ -30,10 +26,21 @@ function updateDateTime() {
     if (datetimeEl) datetimeEl.textContent = formatted;
 }
 
-// Update immediately and every minute
+// ===== NO-SHOW TIMER DROPDOWN =====
+const timerSelect = document.getElementById('no-show-timer');
+if (timerSelect) {
+    timerSelect.addEventListener('change', (e) => {
+        const minutes = parseInt(e.target.value);
+        setNoShowTimer(minutes);
+        // Re-check existing guests with new timer
+        checkNoShows(renderWaitlist);
+    });
+}
+
+// ===== INITIALIZE =====
+loadGuests();
 updateDateTime();
 setInterval(updateDateTime, 60000);
 
-
-// Start auto no-show timer
+// Start auto no-show timer (runs every 30 seconds)
 setInterval(() => checkNoShows(renderWaitlist), 30000);

@@ -27,9 +27,30 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
+/* ===== HEADER ===== */
+header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.header-left {
+    width: 100px; /* Balances the timer selector on the right */
+}
+
 /* ===== BRAND ===== */
 .brand {
-    margin-bottom: 8px;
+    margin: 0;
+    text-align: center;
 }
 
 .brand h1 {
@@ -46,29 +67,42 @@ body {
     display: inline-block;
 }
 
-/* ===== HEADER ===== */
-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 32px;
-    text-align: center;
-    gap: 12px;  /* ← ADD THIS - consistent spacing between elements */
+/* ===== TIMER SELECTOR - Clean & Modern ===== */
+.timer-selector {
+    width: 100px;
+    text-align: right;
 }
 
-h1 {
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
+.timer-selector select {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-family: inherit;
     color: #1F2937;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.timer-selector select:hover {
+    border-color: #1E40AF;
+    background: #FFFFFF;
+}
+
+.timer-selector select:focus {
+    outline: none;
+    border-color: #1E40AF;
+    box-shadow: 0 0 0 2px rgba(30,64,175,0.1);
+}
+
+/* ===== DATETIME ===== */
 .datetime {
     color: #6B7280;
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 0;  /* ← CHANGE from 16px to 0 (gap handles spacing) */
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 /* ===== ADD GUEST BUTTON ===== */
@@ -83,7 +117,6 @@ h1 {
     width: 100%;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.2rem;
     margin: 0 auto;
 }
 
@@ -111,10 +144,6 @@ h1 {
 .btn-add:active span {
     box-shadow: 2px 2px 0 0 #1F2937;
     transform: translate(2px, 2px);
-}
-
-.btn-add:focus-visible {
-    outline: none;
 }
 
 /* ===== ACTION BUTTONS ===== */
